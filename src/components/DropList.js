@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 import { useForm } from 'react-hook-form'
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
 
 import DuckHunter from './../artifacts/contracts/DuckHunter.sol/DuckHunter.json'
 
@@ -131,56 +132,85 @@ const DropList = () => {
 
   return (
     <div>
-      <button onClick={getDrops}>get drops</button>
-      {drops.loading ? <p>Loading</p> : null}
-      {drops.list.map((item, index) => (
-        <div key={index}>
-          <img src={item.imageUri} style={{ width: 40, height: 40 }} />
-          <p>name: {item.name}</p>
-          <p>description: {item.description}</p>
-          <p>supply: {ethers.utils.formatEther(item.supply)}</p>
-          <p>sale: {ethers.utils.formatEther(item.sale)}</p>
-          <p>presale: {ethers.utils.formatEther(item.presale)}</p>
-          <p>social_1: {item.imageUri}</p>
-          <p>social_2: {item.social_2}</p>
-        </div>
-      ))}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>imageUri</label>
-        <input {...register('imageUri')} />
-        <br />
-        <label>name</label>
-        <input {...register('name')} />
-        <br />
-        <label>description</label>
-        <input {...register('description')} />
-        <br />
-        <label>linkedin</label>
-        <input {...register('social_1')} />
-        <br />
-        <label>discord</label>
-        <input {...register('social_2')} />
-        <br />
-        <label>website</label>
-        <input {...register('website')} />
-        <br />
-        <label>price</label>
-        <input {...register('price')} />
-        <br />
-        <label>supply</label>
-        <input {...register('supply')} />
-        <br />
-        <label>presale</label>
-        <input {...register('presale')} />
-        <br />
-        <label>sale</label>
-        <input {...register('sale')} />
-        <br />
-        <label>chain</label>
-        <input {...register('chain')} />
-        <br />
-        <input type={'submit'} />
-      </form>
+      <div className='header'>
+        <h3>NFT DuckHunter</h3>
+      </div>
+      <div className='content'>
+        <Tabs>
+          <TabList>
+            <Tab>Title 1</Tab>
+            <Tab>Title 2</Tab>
+          </TabList>
+          <TabPanel>
+            <button onClick={getDrops}>get drops</button>
+            {drops.loading ? <p>Loading</p> : null}
+            <div style={{ height: 50 }}></div>
+            {drops.list.map((item, index) => (
+              <div className='dropContainer' key={index}>
+                <div>
+                  <p className='dropText'>{item.name}</p>
+                  <p className='dropText'>{item.description}</p>
+                  <div style={{ height: 50 }}></div>
+                  <img className='dropImage' src={item.imageUri} />
+                </div>
+                <div>
+                  <p className='dropText'>LinkedIn: {item.social_1}</p>
+                  <p className='dropText'>Descord: {item.social_2}</p>
+                </div>
+                <div>
+                  <p className='dropText'>
+                    Total Supply: {ethers.utils.formatEther(item.supply)}
+                  </p>
+                  <p className='dropText'>
+                    Presale Date: {ethers.utils.formatEther(item.presale)}
+                  </p>
+                  <p className='dropText'>
+                    Sale Date: {ethers.utils.formatEther(item.sale)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </TabPanel>
+          <TabPanel>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label>imageUri</label>
+              <input {...register('imageUri')} />
+              <br />
+              <label>name</label>
+              <input {...register('name')} />
+              <br />
+              <label>description</label>
+              <input {...register('description')} />
+              <br />
+              <label>linkedin</label>
+              <input {...register('social_1')} />
+              <br />
+              <label>discord</label>
+              <input {...register('social_2')} />
+              <br />
+              <label>website</label>
+              <input {...register('website')} />
+              <br />
+              <label>price</label>
+              <input {...register('price')} />
+              <br />
+              <label>supply</label>
+              <input {...register('supply')} />
+              <br />
+              <label>presale</label>
+              <input {...register('presale')} />
+              <br />
+              <label>sale</label>
+              <input {...register('sale')} />
+              <br />
+              <label>chain</label>
+              <input {...register('chain')} />
+              <br />
+              <input type={'submit'} />
+            </form>
+          </TabPanel>
+        </Tabs>
+      </div>
     </div>
   )
 }

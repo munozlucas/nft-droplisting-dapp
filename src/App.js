@@ -1,12 +1,12 @@
 import React from 'react'
-import './App.css'
 import DropList from './components/DropList'
+import './styles/styles.css'
 
 function App() {
   return (
-    <div className="App">
+    <>
       <DropList />
-    </div>
+    </>
   )
 }
 
