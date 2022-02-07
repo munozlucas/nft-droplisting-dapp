@@ -43,7 +43,7 @@ async function main() {
 
   console.log('DuckHunter deployed to:', duckHunter.address)
 
-  const addDropTx1 = await duckHunter.addDrop(drop)
+  /*const addDropTx1 = await duckHunter.addDrop(drop)
   const addDropTx2 = await duckHunter.addDrop(drop)
 
   await addDropTx1.wait()
@@ -53,7 +53,11 @@ async function main() {
 
   await updateDropTx.wait()
 
-  console.log(await duckHunter.getDrops())
+  const approveDropTx = await duckHunter.approveDrop(0)
+
+  await approveDropTx.wait()
+
+  console.log(await duckHunter.getDrops())*/
 
 }
 
